@@ -1,4 +1,6 @@
-exports.handler = async function(event) {
+import { Handler } from "aws-lambda";
+
+export const handler:Handler = async function(event) {
   console.log("request:", JSON.stringify(event, undefined, 2));
   return {
     statusCode: 200,

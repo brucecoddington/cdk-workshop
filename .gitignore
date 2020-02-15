@@ -1,7 +1,16 @@
-!jest.config.js
-*.d.ts
-node_modules
+*.iml
+.idea/
+.DS_store
 
-# CDK asset staging directory
-.cdk.staging
+yarn-error.log
+lambda-payloads.json
+
 cdk.out
+compiled
+coverage
+build/
+.gradle/
+.jest
+
+.project
+node_modules

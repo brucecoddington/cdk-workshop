@@ -1,0 +1,22 @@
+{
+  "rootDir": "../",
+  "collectCoverage": true,
+  "coverageDirectory": "<rootDir>/.jest/coverage",
+  "collectCoverageFrom": ["<rootDir>/src/**/*.{ts,tsx}"],
+  "coveragePathIgnorePatterns": ["\\.(ts|tsx).snap$", "\\.d.(ts|tsx)$"],
+  "coverageReporters": ["lcov", "text"],
+  "moduleFileExtensions": ["js", "json", "jsx", "ts", "tsx"],
+  "moduleDirectories": ["node_modules"],
+  "testEnvironment": "node",
+  "transform": {
+    "\\.(ts|tsx)$": "ts-jest"
+  },
+  "preset": "@shelf/jest-dynamodb",
+  "testRegex": "/.*/test/.*|((\\.|/)(test|spec))\\.[jt]sx?$",
+  "testPathIgnorePatterns": ["node_modules", "compiled", "dist", "/.*\\.snap$"],
+  "setupFilesAfterEnv": ["<rootDir>/config/jest/jest.setup.ts"],
+  "moduleNameMapper": {
+    "^mocks/(.*)$": "<rootDir>/../../__mocks__/$1"
+  },
+  "watchPathIgnorePatterns": ["config", "node_modules", "__snapshots__"]
+}

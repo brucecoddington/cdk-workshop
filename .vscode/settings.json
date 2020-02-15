@@ -1,0 +1,10 @@
+{
+  "git.ignoreLimitWarning": true,
+  "typescript.surveys.enabled": true,
+  "typescript.validate.enable": true,
+  "javascript.validate.enable": false,
+  "eslint.packageManager": "yarn",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
+}

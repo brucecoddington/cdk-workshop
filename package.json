@@ -1,24 +1,16 @@
 {
   "name": "cdk-workshop",
   "version": "0.1.0",
-  "bin": {
-    "cdk-workshop": "bin/cdk-workshop.js"
-  },
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
-    "test": "jest",
-    "cdk": "cdk"
-  },
-  "devDependencies": {
-    "aws-cdk": "1.24.0",
-    "@aws-cdk/assert": "1.24.0",
-    "@types/jest": "^24.0.22",
-    "@types/node": "10.17.5",
-    "jest": "^24.9.0",
-    "ts-jest": "^24.1.0",
-    "ts-node": "^8.1.0",
-    "typescript": "~3.7.2"
+    "lint": "eslint --ext .ts src --fix",
+    "build": "webpack --config config/webpack/webpack.prod.config.js",
+    "build:dev": "webpack --config config/webpack/webpack.dev.config.js",
+    "prettier": "prettier --write",
+    "clean": "rimraf compiled dist node_modules",
+    "clean:all": "yarn clean:yarn-lock && yarn clean",
+    "clean:yarn-lock": "rimraf yarn.lock",
+    "test": "jest --config ./config/jest/jest.base.js --watchAll --colors",
+    "test:pipeline": "cross-env TEST_REPORT_PATH=.jest/sonar jest --config ./config/jest/jest.ci.js --colors --runInBand"
   },
   "dependencies": {
     "@aws-cdk/aws-apigateway": "^1.24.0",
@@ -29,5 +21,133 @@
     "@aws-cdk/aws-sqs": "1.24.0",
     "@aws-cdk/core": "1.24.0",
     "cdk-dynamo-table-viewer": "^3.1.2"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "1.24.0",
+    "@babel/cli": "7.8.4",
+    "@babel/core": "7.8.4",
+    "@babel/plugin-external-helpers": "7.8.3",
+    "@babel/plugin-proposal-class-properties": "7.8.3",
+    "@babel/plugin-proposal-decorators": "7.8.3",
+    "@babel/plugin-proposal-object-rest-spread": "7.8.3",
+    "@babel/plugin-proposal-optional-chaining": "7.8.3",
+    "@babel/plugin-syntax-dynamic-import": "7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "7.8.3",
+    "@babel/plugin-transform-runtime": "7.8.3",
+    "@babel/polyfill": "7.8.3",
+    "@babel/preset-env": "7.8.4",
+    "@babel/preset-react": "7.8.3",
+    "@babel/preset-typescript": "7.8.3",
+    "@babel/register": "7.8.3",
+    "@commitlint/cli": "8.3.5",
+    "@commitlint/config-conventional": "8.3.4",
+    "@types/aws-lambda": "8.10.40",
+    "@types/jest": "25.1.2",
+    "@types/lodash.get": "4.4.6",
+    "@types/node": "12.12.26",
+    "@types/ramda": "0.26.41",
+    "@types/uuid": "3.4.7",
+    "@typescript-eslint/eslint-plugin": "2.19.0",
+    "@typescript-eslint/parser": "2.19.0",
+    "aws-cdk": "^1.24.0",
+    "aws-sdk-mock": "5.0.0",
+    "babel-eslint": "10.0.3",
+    "babel-jest": "25.1.0",
+    "babel-loader": "8.0.6",
+    "babel-preset-env": "1.7.0",
+    "commitizen": "4.0.3",
+    "conventional-changelog-cli": "2.0.31",
+    "copyfiles": "2.2.0",
+    "cross-env": "7.0.0",
+    "cz-conventional-changelog": "3.1.0",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.10.0",
+    "eslint-config-standard": "14.1.0",
+    "eslint-import-resolver-node": "0.3.3",
+    "eslint-import-resolver-typescript": "2.0.0",
+    "eslint-plugin-cypress": "2.9.0",
+    "eslint-plugin-import": "2.20.1",
+    "eslint-plugin-jest": "23.7.0",
+    "eslint-plugin-node": "11.0.0",
+    "eslint-plugin-prettier": "3.1.2",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-simple-import-sort": "5.0.1",
+    "eslint-plugin-standard": "4.0.1",
+    "glob": "7.1.6",
+    "husky": "4.2.1",
+    "jasmine-reporters": "2.3.2",
+    "jest": "25.1.0",
+    "jest-dynalite": "1.1.6",
+    "jest-environment-node": "25.1.0",
+    "jest-html-reporter": "2.8.0",
+    "jest-sonar-reporter": "2.0.0",
+    "lambda-local": "1.7.1",
+    "lint-staged": "10.0.7",
+    "lodash.camelcase": "4.3.0",
+    "make-dir-cli": "2.0.0",
+    "ncp": "2.0.0",
+    "nyc": "15.0.0",
+    "prettier": "1.19.1",
+    "rimraf": "3.0.1",
+    "run-sequence": "2.2.1",
+    "standard-changelog": "2.0.21",
+    "supports-color": "7.1.0",
+    "ts-jest": "25.2.0",
+    "ts-loader": "6.2.1",
+    "ts-node": "8.6.2",
+    "tsconfig-paths": "3.9.0",
+    "typedoc": "0.16.9",
+    "typescript": "3.7.5",
+    "webpack": "4.41.5",
+    "webpack-cli": "3.3.10",
+    "webpack-copy-plugin": "0.0.4",
+    "webpack-dev-server": "3.10.3",
+    "webpack-merge": "4.2.2",
+    "webpack-node-externals": "1.7.2"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ],
+    "rules": {
+      "scope-case": [
+        2,
+        "always",
+        [
+          "lower-case",
+          "upper-case"
+        ]
+      ]
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "src/*.{json,css,md}": [
+      "yarn run prettier"
+    ],
+    "src/*.{js,ts}": [
+      "yarn run lint"
+    ]
+  },
+  "jestSonar": {
+    "reportPath": ".jest/sonar"
+  },
+  "jest-html-reporter": {
+    "pageTitle": "Dental eApp Lambdas",
+    "outputPath": ".jest/html/index.html",
+    "includeFailureMsg": true
+  },
+  "dependenciesMeta": {
+    "husky": {
+      "unplugged": true
+    },
+    "jest": {
+      "unplugged": true
+    }
   }
 }
