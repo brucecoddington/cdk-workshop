@@ -33,6 +33,7 @@ module.exports = {
   },
   // add your custom rules here
   rules: {
+    "prettier/prettier": "error",
     "simple-import-sort/sort": "error",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/explicit-function-return-type": "off",

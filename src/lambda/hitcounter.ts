@@ -7,17 +7,21 @@ export const handler: Handler = async function(event) {
   const ddb = new DynamoDB();
   const lambda = new Lambda();
 
-  await ddb.updateItem({
-    TableName: process.env.HITS_TABLE_NAME as any,
-    Key: { path: { S: event.path }},
-    UpdateExpression: "ADD hits :incr",
-    ExpressionAttributeValues: { ':incr': { N: "1" }}
-  }).promise();
+  await ddb
+    .updateItem({
+      TableName: process.env.HITS_TABLE_NAME as any,
+      Key: { path: { S: event.path } },
+      UpdateExpression: "ADD hits :incr",
+      ExpressionAttributeValues: { ":incr": { N: "1" } }
+    })
+    .promise();
 
-  const response = await lambda.invoke({
-    FunctionName: process.env.DOWNSTREAM_FUNCTION_NAME as any,
-    Payload: JSON.stringify(event)
-  }).promise()
+  const response = await lambda
+    .invoke({
+      FunctionName: process.env.DOWNSTREAM_FUNCTION_NAME as any,
+      Payload: JSON.stringify(event)
+    })
+    .promise();
 
   console.log("downstream response:", JSON.stringify(response, undefined, 2));
 

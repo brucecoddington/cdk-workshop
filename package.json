@@ -130,9 +130,6 @@
     }
   },
   "lint-staged": {
-    "src/*.{json,css,md}": [
-      "yarn run prettier"
-    ],
     "src/*.{js,ts}": [
       "yarn run lint"
     ]
@@ -141,16 +138,8 @@
     "reportPath": ".jest/sonar"
   },
   "jest-html-reporter": {
-    "pageTitle": "Dental eApp Lambdas",
+    "pageTitle": "CDK Workshop",
     "outputPath": ".jest/html/index.html",
     "includeFailureMsg": true
-  },
-  "dependenciesMeta": {
-    "husky": {
-      "unplugged": true
-    },
-    "jest": {
-      "unplugged": true
-    }
   }
 }
