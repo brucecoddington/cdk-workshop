@@ -3,14 +3,15 @@
   "version": "0.1.0",
   "scripts": {
     "lint": "eslint --ext .ts src --fix",
-    "build": "webpack --config config/webpack/webpack.prod.config.js",
-    "build:dev": "webpack --config config/webpack/webpack.dev.config.js",
+    "prebuild": "rimraf dist",
+    "build": "tsc",
+    "build:dev": "tsc --watch",
     "prettier": "prettier --write",
-    "clean": "rimraf compiled dist node_modules",
-    "clean:all": "yarn clean:yarn-lock && yarn clean",
-    "clean:yarn-lock": "rimraf yarn.lock",
-    "test": "jest --config ./config/jest/jest.base.js --watchAll --colors",
-    "test:pipeline": "cross-env TEST_REPORT_PATH=.jest/sonar jest --config ./config/jest/jest.ci.js --colors --runInBand"
+    "clean": "rimraf compiled dist",
+    "clean:all": "yarn clean && yarn clean:yarn-lock",
+    "clean:yarn-lock": "rimraf yarn.lock node_modules",
+    "test": "jest --config ./test/jest.base.js --watchAll --colors",
+    "test:pipeline": "cross-env TEST_REPORT_PATH=.jest/sonar jest --config ./test/jest.ci.js --colors --runInBand"
   },
   "dependencies": {
     "@aws-cdk/aws-apigateway": "^1.24.0",

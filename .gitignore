@@ -6,10 +6,8 @@ yarn-error.log
 lambda-payloads.json
 
 cdk.out
-compiled
-coverage
+dist
 build/
-.gradle/
 .jest
 
 .project
